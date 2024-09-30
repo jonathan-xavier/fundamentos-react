@@ -98,6 +98,7 @@
 .commentForm button[type=submit] {
     padding: 1rem 1.5rem;
     margin-top: 1rem;
+    margin-bottom: 1rem;
     border-radius: 8px;
     border: 0;
     background: var(--green-500);
