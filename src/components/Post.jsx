@@ -28,11 +28,18 @@ export function Post({ author, content, publishedAt }) {
   });
 
   function handleNewCommentChange() {
+    event.target.setCustomValidity('')
     setNewCommentText(event.target.value)
   
   }
 
+  function handleNewCommentInvalid () {
+    event.target.setCustomValidity('Esse campo é obrigatório!')
+  }
+
   //funcao de deletar
+  //imutabilidade -> as variáveis não sofrem mutação, nós criamos um novo valor  (
+  // Um novo espaço na memória)
   function deleteComment(commentsToDelete){
 
     const commentsWithoutDeletedOne = comments.filter(comment => {
@@ -52,6 +59,8 @@ export function Post({ author, content, publishedAt }) {
 
     console.log(comments)
   }
+
+  const isNewCommentEmpty = newCommentText.length === 0;
   return (
     <article className={styles.post}>
       <header>
@@ -86,12 +95,15 @@ export function Post({ author, content, publishedAt }) {
 
         <textarea name="comment"
          placeholder="Deixe um comentario" 
-         onChange={handleNewCommentChange} 
          value={newCommentText}
+         onChange={handleNewCommentChange} 
+         onInvalid={handleNewCommentInvalid}
+         required
+
         />
 
         <footer>
-          <button type="submit">Publicar</button>
+          <button type="submit" disabled={isNewCommentEmpty}>Publicar</button>
         </footer>
       </form>
 
